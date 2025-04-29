@@ -131,5 +131,24 @@
 
         </androidx.cardview.widget.CardView>
 
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/themeSwitcher"
+            android:layout_width="357dp"
+            android:layout_height="45dp"
+            android:background="@color/edoctor_blue"
+            android:fontFamily="@font/inter_bold"
+            android:gravity="center_vertical"
+            android:text="Темная тема"
+            android:textColor="@color/white"
+            android:textSize="@dimen/big_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.481"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cvHistory"
+            app:layout_constraintVertical_bias="0.139" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </FrameLayout>
