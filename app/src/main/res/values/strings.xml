@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">E-DOCTOR</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_in">вход</string>
+    <string name="login">логин</string>
+    <string name="password">пароль</string>
+    <string name="reset_password">забыли пароль?</string>
+    <string name="sign_up_login_screen">зарегистрироваться?</string>
+    <string name="log_in_button">войти</string>
+    <string name="register">регистрация</string>
+    <string name="fio">фио</string>
+    <string name="email">эл-почта</string>
+    <string name="already_have_account">уже есть аккаунт?</string>
+    <string name="search_text">Специальность или ФИО врача</string>
+    <string name="add_title">Запись на прием</string>
+    <string name="leave_order">Оставить заявку</string>
+    <string name="money_value">Баланс счета</string>
+    <string name="appointment">Запись</string>
+    <string name="active_orders">Активные заявки</string>
+    <string name="histoty">История консультаций</string>
+    <string name="reset">восстановление</string>
+    <string name="remember_password">вспомнил пароль!</string>
+    <string name="code">код</string>
+    <string name="send_code">отправить код</string>
+    <string name="new_password">новый пароль</string>
+    <string name="repeat_password">повторите пароль</string>
+</resources>

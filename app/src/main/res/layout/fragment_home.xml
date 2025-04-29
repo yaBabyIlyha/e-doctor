@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageTopBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/home_fragment_bar_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imUser"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/avatar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/imageTopBar"
+            app:layout_constraintTop_toTopOf="@+id/imageTopBar"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance_App_CornerSize" />
+
+        <TextView
+            android:id="@+id/tvUserName2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="{username}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/big_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imUser"
+            app:layout_constraintTop_toTopOf="@+id/imageTopBar" />
+
+        <TextView
+            android:id="@+id/tvUserId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="1dp"
+            android:fontFamily="@font/inter_semibold"
+            android:text="{user_id}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/middle_text"
+            app:layout_constraintEnd_toEndOf="@+id/imageTopBar"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imUser"
+            app:layout_constraintTop_toBottomOf="@+id/tvUserName2" />
+
+        <ImageView
+            android:id="@+id/imageViewSettingsIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="21dp"
+            android:layout_marginEnd="26dp"
+            android:src="@drawable/ic_settings"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/imUser"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageViewMoneyBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:src="@drawable/home_fragment_right_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageTopBar" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageViewInfoBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:src="@drawable/home_fragment_right_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewMoneyBar" />
+
+        <ImageView
+            android:id="@+id/imageViewCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="22dp"
+            android:src="@drawable/ic_card"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewMoneyBar"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/imageViewMoneyBar"
+            app:layout_constraintTop_toTopOf="@+id/imageViewMoneyBar" />
+
+        <TextView
+            android:id="@+id/tvWallet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/money_value"
+            android:textColor="@color/white"
+            android:textSize="@dimen/big_text"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewMoneyBar"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imageViewCard"
+            app:layout_constraintTop_toTopOf="@+id/imageViewMoneyBar" />
+
+        <TextView
+            android:id="@+id/tvMoneyValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/inter_semibold"
+            android:text="{value} ₽"
+            android:textColor="@color/white"
+            android:textSize="@dimen/big_text"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewMoneyBar"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imageViewCard"
+            app:layout_constraintTop_toBottomOf="@+id/tvWallet" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageViewDoctor"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/avatar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/imageViewInfoBar"
+            app:layout_constraintTop_toTopOf="@+id/imageViewInfoBar"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance_App_CornerSize" />
+
+        <TextView
+            android:id="@+id/tvDoctorName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="{doctor_name}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/big_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imageViewDoctor"
+            app:layout_constraintTop_toTopOf="@+id/imageViewInfoBar" />
+
+        <TextView
+            android:id="@+id/tvDoctorQualify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:fontFamily="@font/inter_semibold"
+            android:text="{doctor_qualify}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/big_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imageViewDoctor"
+            app:layout_constraintTop_toBottomOf="@+id/tvDoctorName" />
+
+        <TextView
+            android:id="@+id/tvRecord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="45dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/appointment"
+            android:textColor="@color/white"
+            android:textSize="@dimen/big_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/imageViewDoctor"
+            app:layout_constraintTop_toTopOf="@+id/imageViewInfoBar" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="52dp"
+            android:fontFamily="@font/inter_semibold"
+            android:text="{date}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/big_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/imageViewDoctor"
+            app:layout_constraintTop_toBottomOf="@+id/tvRecord" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

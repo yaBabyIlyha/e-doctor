@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ShapeAppearance_App_CornerSize">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="CustomSearchView" parent="Widget.AppCompat.SearchView">
+        <item name="iconTint">@color/white</item>
+        <item name="hintTextColor">@color/white</item>
+        <item name="icon">@drawable/ic_search</item>
+    </style>
+    <style name="BottomRoundedCard" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomLeft">16dp</item> <!-- Радиус для нижнего левого угла -->
+        <item name="cornerSizeBottomRight">16dp</item> <!-- Радиус для нижнего правого угла -->
+        <item name="cornerSizeTopLeft">0dp</item> <!-- Верхний левый угол без скругления -->
+        <item name="cornerSizeTopRight">0dp</item> <!-- Верхний правый угол без скругления -->
+    </style>
+
+</resources>
+
+
