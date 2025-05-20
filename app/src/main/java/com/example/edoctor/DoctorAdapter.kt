@@ -24,11 +24,11 @@ class DoctorAdapter(
 
     override fun onBindViewHolder(holder: DoctorViewHolder, position: Int) {
         val doctor = doctors[position]
-        holder.tvDoctorName.text = "${doctor.firstName} ${doctor.lastName}"
+        holder.tvDoctorName.text = "${doctor.firstName} ${doctor.secondName}"
         holder.tvDoctorType.text = doctor.specialization
 
         holder.itemView.setOnClickListener {
-            onItemClick("${doctor.firstName} ${doctor.lastName}")
+            onItemClick("${doctor.firstName} ${doctor.secondName}")
         }
     }
 

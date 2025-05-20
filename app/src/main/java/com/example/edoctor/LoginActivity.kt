@@ -45,6 +45,9 @@ class LoginActivity : AppCompatActivity() {
             override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
                 if (response.isSuccessful) {
                     Toast.makeText(this@LoginActivity, "Успешный вход!", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 } else {
                     Toast.makeText(this@LoginActivity, "Ошибка входа!", Toast.LENGTH_SHORT).show()
                 }

@@ -1,8 +1,9 @@
 package com.example.edoctor
 
 data class Doctor(
-    val id: Int,
+    val id: String,
     val firstName: String,
-    val lastName : String,
+    val secondName : String,
+    val thirdName : String,
     val specialization: String
 )

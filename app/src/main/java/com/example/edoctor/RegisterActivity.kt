@@ -43,6 +43,9 @@ class RegisterActivity : AppCompatActivity() {
             override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
                 if (response.isSuccessful) {
                     Toast.makeText(this@RegisterActivity, "User registered!", Toast.LENGTH_LONG).show()
+                    val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 } else {
                     Toast.makeText(this@RegisterActivity, "Error!", Toast.LENGTH_LONG).show()
                 }
