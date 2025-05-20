@@ -2,11 +2,15 @@ package com.example.edoctor
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.edoctor.databinding.ActivityRegisterBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
@@ -25,5 +29,28 @@ class RegisterActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
+
+        binding.buttonLogin.setOnClickListener {
+            registerUser(binding.editTextLogin.text.toString(),
+                binding.editTextPassword.text.toString(),
+                binding.editTextEmail.text.toString())
+        }
+    }
+
+    private fun registerUser(login: String, password: String, email: String) {
+        val call = ApiClient.authApi.register(RegisterRequest(login, password, email))
+        call.enqueue(object : Callback<AuthResponse> {
+            override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(this@RegisterActivity, "User registered!", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(this@RegisterActivity, "Error!", Toast.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
+                Toast.makeText(this@RegisterActivity, "Second Error: ${t.message}", Toast.LENGTH_LONG).show()
+            }
+        })
     }
 }
