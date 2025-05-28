@@ -1,12 +1,13 @@
+package com.example.edoctor.doctor
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.edoctor.ApiClient
-import com.example.edoctor.Doctor
+import com.example.edoctor.API.ApiClient
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-// DoctorViewModel.kt
+// com.example.edoctor.doctor.DoctorViewModel.kt
 class DoctorViewModel : ViewModel() {
     private val _doctors = MutableStateFlow<List<Doctor>>(emptyList())
     private val _isLoading = MutableStateFlow(false)

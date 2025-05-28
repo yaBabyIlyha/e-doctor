@@ -1,4 +1,4 @@
-package com.example.edoctor
+package com.example.edoctor.API
 
 data class LoginRequest(
     val login: String,
@@ -13,4 +13,10 @@ data class RegisterRequest(
 
 data class AuthResponse (
     val token: String
+)
+
+data class UserDataResponse (
+    val login: String,
+    val email: String,
+    val value: String
 )

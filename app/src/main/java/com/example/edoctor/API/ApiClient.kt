@@ -1,4 +1,4 @@
-package com.example.edoctor
+package com.example.edoctor.API
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

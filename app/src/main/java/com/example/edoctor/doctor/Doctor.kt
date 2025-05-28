@@ -1,4 +1,4 @@
-package com.example.edoctor
+package com.example.edoctor.doctor
 
 data class Doctor(
     val id: String,

@@ -1,4 +1,4 @@
-package com.example.edoctor
+package com.example.edoctor.activitys
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -7,6 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import com.example.edoctor.fragments.AddFragment
+import com.example.edoctor.fragments.HomeFragment
+import com.example.edoctor.fragments.ProfileFragment
+import com.example.edoctor.R
 import com.example.edoctor.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

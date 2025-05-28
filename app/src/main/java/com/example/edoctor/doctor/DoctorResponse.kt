@@ -1,4 +1,4 @@
-package com.example.edoctor
+package com.example.edoctor.doctor
 
 import com.google.gson.annotations.SerializedName
 

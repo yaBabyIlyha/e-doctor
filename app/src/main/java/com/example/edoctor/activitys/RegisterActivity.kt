@@ -1,4 +1,4 @@
-package com.example.edoctor
+package com.example.edoctor.activitys
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.edoctor.API.ApiClient
+import com.example.edoctor.API.AuthResponse
+import com.example.edoctor.API.RegisterRequest
+import com.example.edoctor.R
 import com.example.edoctor.databinding.ActivityRegisterBinding
 import retrofit2.Call
 import retrofit2.Callback

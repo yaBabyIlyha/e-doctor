@@ -17,20 +17,20 @@
         android:theme="@style/Theme.Edoctor"
         tools:targetApi="31">
         <activity
-            android:name=".HistoryActivity"
+            android:name=".activitys.HistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".ResetPasswordActivity"
+            android:name=".activitys.ResetPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activitys.MainActivity"
             android:label="@string/app_name"/>
 <!--            android:configChanges="orientation|screenSize|keyboardHidden"/>-->
         <activity
-            android:name=".RegisterActivity"
+            android:name=".activitys.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".activitys.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

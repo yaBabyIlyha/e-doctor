@@ -1,4 +1,4 @@
-package com.example.edoctor
+package com.example.edoctor.activitys
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.edoctor.API.ApiClient
+import com.example.edoctor.API.AuthResponse
+import com.example.edoctor.API.LoginRequest
+import com.example.edoctor.R
 import com.example.edoctor.databinding.ActivityLoginBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -44,8 +48,12 @@ class LoginActivity : AppCompatActivity() {
         call.enqueue(object : Callback<AuthResponse> {
             override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
                 if (response.isSuccessful) {
-                    Toast.makeText(this@LoginActivity, "Успешный вход!", Toast.LENGTH_SHORT).show()
+                    val token = response.body()?.token
+                    if (token != null) {
+                        saveToken(token)
+                    }
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    intent.putExtra("token", token)
                     startActivity(intent)
                     finish()
                 } else {
@@ -56,6 +64,11 @@ class LoginActivity : AppCompatActivity() {
             override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
                 Toast.makeText(this@LoginActivity, "Ошибка сети: ${t.message}", Toast.LENGTH_LONG).show()
                 println(t.message)
+            }
+
+            private fun saveToken(token: String) {
+                val prefs = getSharedPreferences("auth", MODE_PRIVATE)
+                prefs.edit().putString("token", token).apply()
             }
         })
     }

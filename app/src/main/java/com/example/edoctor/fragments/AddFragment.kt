@@ -1,24 +1,25 @@
-package com.example.edoctor
+package com.example.edoctor.fragments
 
-import DoctorViewModel
-import android.content.Context
+import android.R
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.edoctor.databinding.FragmentAddPortBinding
+import com.example.edoctor.doctor.DoctorAdapter
+import com.example.edoctor.doctor.DoctorViewModel
 import kotlinx.coroutines.launch
-import android.widget.ArrayAdapter
-import android.widget.Toast
-import androidx.core.content.edit
-import androidx.preference.PreferenceManager
 
 class AddFragment : Fragment() {
     private var _binding: FragmentAddPortBinding? = null
@@ -88,7 +89,7 @@ class AddFragment : Fragment() {
         // Используем mutableListOf для создания изменяемого списка
         searchHistoryAdapter = ArrayAdapter(
             requireContext(),
-            android.R.layout.simple_list_item_1,
+            R.layout.simple_list_item_1,
             getSearchHistory().toMutableList() // Преобразуем в изменяемый список
         )
         binding.lvHistory.adapter = searchHistoryAdapter
@@ -114,7 +115,7 @@ class AddFragment : Fragment() {
         // Обновляем адаптер с пустым списком
         searchHistoryAdapter = ArrayAdapter(
             requireContext(),
-            android.R.layout.simple_list_item_1,
+            R.layout.simple_list_item_1,
             mutableListOf() // Пустой изменяемый список
         )
         binding.lvHistory.adapter = searchHistoryAdapter
@@ -169,7 +170,7 @@ class AddFragment : Fragment() {
         if (history.isNotEmpty()) {
             searchHistoryAdapter = ArrayAdapter(
                 requireContext(),
-                android.R.layout.simple_list_item_1,
+                R.layout.simple_list_item_1,
                 history.toMutableList()
             )
             binding.lvHistory.adapter = searchHistoryAdapter

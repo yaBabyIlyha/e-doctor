@@ -1,9 +1,7 @@
-package com.example.edoctor
+package com.example.edoctor.API
 
-import android.telecom.Call
-import retrofit2.http.Body
+import com.example.edoctor.doctor.DoctorResponse
 import retrofit2.http.GET
-import retrofit2.http.POST
 
 interface ApiService {
     @GET("doctors")

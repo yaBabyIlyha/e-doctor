@@ -1,12 +1,13 @@
-package com.example.edoctor
+package com.example.edoctor.fragments
 
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Switch
 import androidx.fragment.app.Fragment
+import com.example.edoctor.App
+import com.example.edoctor.R
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 class ProfileFragment : Fragment() {
