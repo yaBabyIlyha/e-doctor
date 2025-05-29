@@ -1,13 +1,17 @@
 package com.example.edoctor.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.example.edoctor.App
 import com.example.edoctor.R
+import com.example.edoctor.activitys.LoginActivity
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 class ProfileFragment : Fragment() {
@@ -24,6 +28,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var logOutButton = view.findViewById<ImageView>(R.id.imageViewSettingsIcon)
         mySwitch = view.findViewById(R.id.themeSwitcher)
 
         (activity?.application as? App)?.let { app ->
@@ -35,6 +40,11 @@ class ProfileFragment : Fragment() {
         } ?: run {
             mySwitch.isEnabled = false
             Log.e("ProfileFragment", "Failed to get App instance")
+        }
+
+        logOutButton.setOnClickListener {
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            startActivity(intent)
         }
     }
 }

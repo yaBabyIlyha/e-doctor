@@ -33,6 +33,14 @@
             android:textSize="@dimen/big_text"
             android:fontFamily="@font/inter_bold"
             android:text="Доктор Иванов" />
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="0dp"
+            android:layout_marginStart="100dp"
+            android:layout_height="40dp"
+            android:layout_weight="2"
+            app:srcCompat="@drawable/chevron_up" />
     </LinearLayout>
 
     <!-- Список сообщений -->
