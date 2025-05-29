@@ -16,4 +16,8 @@ interface AuthApi {
 
     @GET("user")
     fun getUserData(@Header("Authorization") token: String): Call<UserDataResponse>
+
+    @GET("appointment/next")
+    fun getNextAppointment(@Header("Authorization") token: String): Call<AppointmentResponse>
+
 }

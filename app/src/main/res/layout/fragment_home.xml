@@ -39,30 +39,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/inter_bold"
             android:text="{username}"
             android:textColor="@color/white"
             android:textSize="@dimen/big_text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.078"
             app:layout_constraintStart_toEndOf="@+id/imUser"
             app:layout_constraintTop_toTopOf="@+id/imageTopBar" />
-
-        <TextView
-            android:id="@+id/tvUserId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="1dp"
-            android:fontFamily="@font/inter_semibold"
-            android:text="{user_id}"
-            android:textColor="@color/white"
-            android:textSize="@dimen/middle_text"
-            app:layout_constraintEnd_toEndOf="@+id/imageTopBar"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/imUser"
-            app:layout_constraintTop_toBottomOf="@+id/tvUserName2" />
 
         <ImageView
             android:id="@+id/imageViewSettingsIcon"
