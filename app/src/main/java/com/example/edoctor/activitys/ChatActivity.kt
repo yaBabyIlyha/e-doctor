@@ -15,45 +15,38 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.time.LocalDateTime
 
 class ChatActivity : AppCompatActivity() {
 
     private lateinit var doctorId: String
-    private lateinit var messageAdapter: MessageAdapter
     private lateinit var userLogin: String
+    private lateinit var messageAdapter: MessageAdapter
+    private var isDoctor: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
 
-        // Получение данных из Intent
-        userLogin = intent.getStringExtra("userLogin") ?: "guest"
+        // Получаем данные из Intent
         doctorId = intent.getStringExtra("doctorId") ?: return
+        userLogin = intent.getStringExtra("userLogin") ?: "guest"
         val doctorName = intent.getStringExtra("doctorName") ?: "Доктор"
+        isDoctor = intent.getBooleanExtra("isDoctor", false)
 
-        // Установка имени доктора
-        findViewById<TextView>(R.id.tvDoctorChatName).text = doctorName
+        // Устанавливаем имя доктора (можно поменять, если пользователь)
+        findViewById<TextView>(R.id.tvDoctorChatName).text =
+            if (isDoctor) userLogin else doctorName
 
-        // Настройка RecyclerView и адаптера
+        // Настройка RecyclerView
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerMessages)
-        messageAdapter = MessageAdapter(userLogin)
+        messageAdapter = MessageAdapter(if (isDoctor) doctorId else userLogin)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = messageAdapter
 
         // Загрузка сообщений
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val messages = ApiClient.chatApi.getMessages(userLogin, doctorId)
-                withContext(Dispatchers.Main) {
-                    messageAdapter.setMessages(messages)
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
+        loadMessages()
 
-        // Кнопка отправки сообщений
+        // Кнопка отправки
         findViewById<ImageButton>(R.id.btnSend).setOnClickListener {
             val messageText = findViewById<EditText>(R.id.etMessage).text.toString()
             if (messageText.isNotBlank()) {
@@ -61,8 +54,6 @@ class ChatActivity : AppCompatActivity() {
                 findViewById<EditText>(R.id.etMessage).setText("")
             }
         }
-
-        loadMessages()
     }
 
     private fun loadMessages() {
@@ -79,11 +70,15 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun sendMessage(content: String) {
+        val senderId = if (isDoctor) doctorId else userLogin
+        val receiverId = if (isDoctor) userLogin else doctorId
+
         val message = Message(
-            sender = userLogin,
-            receiverDoctorId = doctorId,
-            content = content,
+            senderLogin = senderId,
+            receiverLogin = receiverId,
+            content = content
         )
+
 
         CoroutineScope(Dispatchers.IO).launch {
             try {

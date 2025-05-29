@@ -25,7 +25,7 @@ class MessageAdapter(private val userLogin: String) :
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (messages[position].sender == userLogin) 0 else 1
+        return if (messages[position].senderLogin == userLogin) 0 else 1
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

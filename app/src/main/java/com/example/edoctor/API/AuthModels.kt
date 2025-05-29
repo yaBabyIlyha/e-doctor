@@ -1,6 +1,7 @@
 package com.example.edoctor.API
 
 import java.time.LocalDateTime
+import kotlinx.serialization.Serializable
 
 data class LoginRequest(
     val login: String,
@@ -33,7 +34,20 @@ data class AppointmentResponse(
 )
 
 data class Message(
-    val sender: String,
-    val receiverDoctorId: String,
-    val content: String
+    val senderLogin: String,
+    val receiverLogin: String,
+    val content: String,
+    val timestamp: String? = null // если нужно отображать время
 )
+
+@Serializable
+data class DoctorLoginRequest(
+    val id: String,
+    val password: String
+)
+
+data class ChatItem(
+    val userLogin: String,
+    val lastMessage: String
+)
+

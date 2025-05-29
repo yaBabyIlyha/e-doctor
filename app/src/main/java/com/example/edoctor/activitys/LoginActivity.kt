@@ -29,6 +29,11 @@ class LoginActivity : AppCompatActivity() {
             insets
         }
 
+        binding.textViewTitle.setOnClickListener {
+            val intent = Intent(this, DoctorLoginActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.textViewRegister.setOnClickListener{
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)

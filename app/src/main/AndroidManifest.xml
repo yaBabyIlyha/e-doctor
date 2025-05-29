@@ -17,6 +17,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activitys.DoctorChatsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activitys.DoctorLoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".activitys.ChatActivity"
             android:exported="false" />
         <activity
