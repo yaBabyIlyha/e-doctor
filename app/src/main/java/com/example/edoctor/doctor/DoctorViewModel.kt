@@ -1,5 +1,6 @@
 package com.example.edoctor.doctor
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.edoctor.API.ApiClient
@@ -7,8 +8,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-// com.example.edoctor.doctor.DoctorViewModel.kt
 class DoctorViewModel : ViewModel() {
+    private val _allDoctors = mutableListOf<Doctor>() // хранит оригинал
     private val _doctors = MutableStateFlow<List<Doctor>>(emptyList())
     private val _isLoading = MutableStateFlow(false)
 
@@ -24,7 +25,8 @@ class DoctorViewModel : ViewModel() {
             _isLoading.value = true
             try {
                 val response = ApiClient.doctorApi.getDoctors()
-                _doctors.value = response.map {
+                _allDoctors.clear()
+                _allDoctors.addAll(response.map {
                     Doctor(
                         id = it.id,
                         firstName = it.firstName,
@@ -32,10 +34,10 @@ class DoctorViewModel : ViewModel() {
                         thirdName = it.thirdName,
                         specialization = it.specialization
                     )
-                }
+                })
+                _doctors.value = _allDoctors
             } catch (e: Exception) {
                 e.printStackTrace()
-                // Обработка ошибок
             } finally {
                 _isLoading.value = false
             }
@@ -46,11 +48,10 @@ class DoctorViewModel : ViewModel() {
         viewModelScope.launch {
             _isLoading.value = true
             try {
-                val allDoctors = _doctors.value
                 _doctors.value = if (query.isEmpty()) {
-                    allDoctors
+                    _allDoctors
                 } else {
-                    allDoctors.filter { doctor ->
+                    _allDoctors.filter { doctor ->
                         doctor.firstName.contains(query, ignoreCase = true) ||
                                 doctor.secondName.contains(query, ignoreCase = true) ||
                                 doctor.specialization.contains(query, ignoreCase = true)

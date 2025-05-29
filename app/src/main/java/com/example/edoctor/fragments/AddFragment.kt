@@ -1,6 +1,8 @@
 package com.example.edoctor.fragments
 
-import android.R
+import android.content.Context
+import android.content.Intent
+import com.example.edoctor.R
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -16,6 +18,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.edoctor.activitys.AddSecondActivity
 import com.example.edoctor.databinding.FragmentAddPortBinding
 import com.example.edoctor.doctor.DoctorAdapter
 import com.example.edoctor.doctor.DoctorViewModel
@@ -53,11 +56,25 @@ class AddFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        binding.rvDoctors.layoutManager = LinearLayoutManager(requireContext())
-        adapter = DoctorAdapter(emptyList()) { query ->
-            addToSearchHistory(query)
-            performSearch(query)
+        adapter = DoctorAdapter(emptyList()) { doctor ->
+            val prefs = requireContext().getSharedPreferences("auth", Context.MODE_PRIVATE)
+            val userLogin = prefs.getString("user_login", null)
+
+            if (userLogin == null) {
+                Toast.makeText(requireContext(), "Ошибка: логин пользователя не найден", Toast.LENGTH_SHORT).show()
+                return@DoctorAdapter
+            }
+
+            val intent = Intent(requireContext(), AddSecondActivity::class.java).apply {
+                val doctorName = "${doctor.firstName} ${doctor.secondName}"
+                putExtra("doctorId", doctor.id)
+                putExtra("userLogin", userLogin)
+                putExtra("doctorName", doctorName)
+                putExtra("doctorType", doctor.specialization)
+            }
+            startActivity(intent)
         }
+        binding.rvDoctors.layoutManager = LinearLayoutManager(requireContext())
         binding.rvDoctors.adapter = adapter
     }
 
@@ -89,7 +106,7 @@ class AddFragment : Fragment() {
         // Используем mutableListOf для создания изменяемого списка
         searchHistoryAdapter = ArrayAdapter(
             requireContext(),
-            R.layout.simple_list_item_1,
+            android.R.layout.simple_list_item_1,
             getSearchHistory().toMutableList() // Преобразуем в изменяемый список
         )
         binding.lvHistory.adapter = searchHistoryAdapter
@@ -115,7 +132,7 @@ class AddFragment : Fragment() {
         // Обновляем адаптер с пустым списком
         searchHistoryAdapter = ArrayAdapter(
             requireContext(),
-            R.layout.simple_list_item_1,
+            android.R.layout.simple_list_item_1,
             mutableListOf() // Пустой изменяемый список
         )
         binding.lvHistory.adapter = searchHistoryAdapter
@@ -132,7 +149,7 @@ class AddFragment : Fragment() {
             toggleHistoryVisibility()
         }
 
-        // Добавьте этот обработчик для кнопки очистки
+
         binding.tvClearHistory.setOnClickListener {
             clearSearchHistory()
         }
@@ -170,7 +187,7 @@ class AddFragment : Fragment() {
         if (history.isNotEmpty()) {
             searchHistoryAdapter = ArrayAdapter(
                 requireContext(),
-                R.layout.simple_list_item_1,
+                android.R.layout.simple_list_item_1,
                 history.toMutableList()
             )
             binding.lvHistory.adapter = searchHistoryAdapter

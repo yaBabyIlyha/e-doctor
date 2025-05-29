@@ -22,7 +22,7 @@ import retrofit2.Response
 class HomeFragment : Fragment() {
     private var doctorName: String = ""
     private var doctorId: String = ""
-
+    private lateinit var rootView: View
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,44 +32,31 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("HomeFragment", "Created onViewCreated")
-
+        rootView = view
 
         loadUserData()
         loadAppointment()
     }
 
     private fun loadUserData() {
-        val token = requireContext().getSharedPreferences("auth", Context.MODE_PRIVATE)
-            .getString("token", null) ?: return
+        val login = requireContext().getSharedPreferences("auth", Context.MODE_PRIVATE)
+            .getString("user_login", null)
 
-        ApiClient.authApi.getUserData("Bearer $token").enqueue(object : Callback<UserDataResponse> {
-            override fun onResponse(
-                call: Call<UserDataResponse>,
-                response: Response<UserDataResponse>
-            ) {
-                if (response.isSuccessful) {
-                    val userData = response.body()
-                    updateUI(userData)
-                }
-            }
-
-            override fun onFailure(call: Call<UserDataResponse>, t: Throwable) {
-                Log.e("HomeFragment", "Error: ${t.message}")
-            }
-        })
+        // Если логин есть, просто показываем его, без запроса
+        updateUI(login)
     }
 
-    private fun updateUI(userData: UserDataResponse?) {
-        view?.findViewById<TextView>(R.id.tvUserName2)?.text = userData?.login ?: "Гость"
-        view?.findViewById<TextView>(R.id.tvMoneyValue)?.text = "${userData?.value ?: '0'} Руб"
+    private fun updateUI(userLogin: String?) {
+        view?.findViewById<TextView>(R.id.tvUserName2)?.text = userLogin ?: "Гость"
+        // Если у тебя нет данных о value без запроса, поставим 0 по умолчанию
+        view?.findViewById<TextView>(R.id.tvMoneyValue)?.text = "0 Руб"
 
         val chatSection = view?.findViewById<ShapeableImageView>(R.id.imageViewInfoBar)
         chatSection?.setOnClickListener {
             val intent = Intent(requireContext(), ChatActivity::class.java)
             intent.putExtra("doctorName", doctorName)
             intent.putExtra("doctorId", doctorId)
-            intent.putExtra("userLogin", userData?.login ?: "guest")
+            intent.putExtra("userLogin", userLogin ?: "guest")
             startActivity(intent)
         }
     }
@@ -80,28 +67,29 @@ class HomeFragment : Fragment() {
             doctorName = "${appointment.doctorFirstName} ${appointment.doctorSecondName}"
             doctorId = appointment.doctorId
             val formattedDate = appointment.dateTime.replace("T", " ")
-            Log.d("HomeFragment", "Updating UI with: $appointment")
-            view?.findViewById<TextView>(R.id.tvDoctorName)?.text = doctorName
-            view?.findViewById<TextView>(R.id.tvDoctorQualify)?.text = appointment.doctorSpecialization ?: "Неизвестно"
-            view?.findViewById<TextView>(R.id.tvDate)?.text = formattedDate
+
+            rootView.findViewById<TextView>(R.id.tvDoctorName)?.text = doctorName
+            rootView.findViewById<TextView>(R.id.tvDoctorQualify)?.text = appointment.doctorSpecialization ?: "Неизвестно"
+            rootView.findViewById<TextView>(R.id.tvDate)?.text = formattedDate
         }
     }
-
 
     private fun loadAppointment() {
         Log.d("HomeFragment", "loadAppointment() called")
 
-        val token = requireContext().getSharedPreferences("auth", Context.MODE_PRIVATE)
-            .getString("token", null)
+        val login = requireContext().getSharedPreferences("auth", Context.MODE_PRIVATE)
+            .getString("user_login", null)
 
-        if (token == null) {
-            Log.e("HomeFragment", "Token is null")
+        if (login == null) {
+            Log.e("HomeFragment", "User login is null")
             return
         }
 
-        Log.d("HomeFragment", "Token found: $token")
+        Log.d("HomeFragment", "User login found: $login")
 
-        ApiClient.authApi.getNextAppointment("Bearer $token").enqueue(object : Callback<AppointmentResponse> {
+        // Тут нужно изменить запрос под API, чтобы он работал без токена.
+        // Например, если есть метод API getNextAppointmentByLogin(login: String):
+        ApiClient.authApi.getNextAppointmentByLogin(login).enqueue(object : Callback<AppointmentResponse> {
             override fun onResponse(
                 call: Call<AppointmentResponse>,
                 response: Response<AppointmentResponse>
@@ -121,5 +109,4 @@ class HomeFragment : Fragment() {
             }
         })
     }
-
 }

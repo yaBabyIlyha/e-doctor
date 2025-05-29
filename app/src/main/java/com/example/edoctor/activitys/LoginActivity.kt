@@ -53,12 +53,11 @@ class LoginActivity : AppCompatActivity() {
         call.enqueue(object : Callback<AuthResponse> {
             override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
                 if (response.isSuccessful) {
-                    val token = response.body()?.token
-                    if (token != null) {
-                        saveToken(token)
-                    }
+                    // Сохраняем только логин
+                    saveUserLogin(login)
+
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                    intent.putExtra("token", token)
+                    intent.putExtra("user_login", login)
                     startActivity(intent)
                     finish()
                 } else {
@@ -71,10 +70,13 @@ class LoginActivity : AppCompatActivity() {
                 println(t.message)
             }
 
-            private fun saveToken(token: String) {
+            private fun saveUserLogin(login: String) {
                 val prefs = getSharedPreferences("auth", MODE_PRIVATE)
-                prefs.edit().putString("token", token).apply()
+                prefs.edit()
+                    .putString("user_login", login)
+                    .apply()
             }
         })
     }
+
 }

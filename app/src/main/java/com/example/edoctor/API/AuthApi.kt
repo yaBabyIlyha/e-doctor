@@ -8,6 +8,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface AuthApi {
     @POST("login")
@@ -19,11 +20,13 @@ interface AuthApi {
     @GET("user")
     fun getUserData(@Header("Authorization") token: String): Call<UserDataResponse>
 
-    @GET("appointment/next")
-    fun getNextAppointment(@Header("Authorization") token: String): Call<AppointmentResponse>
-
     @POST("doctor/login")
     suspend fun doctorLogin(@Body request: DoctorLoginRequest): Response<Unit>
 
+    @POST("appointment")
+    suspend fun createAppointment(@Body appointment: AppointmentRequest): AppointmentResponse
+
+    @GET("appointment/next")
+    fun getNextAppointmentByLogin(@Query("login") login: String): Call<AppointmentResponse>
 
 }

@@ -51,3 +51,9 @@ data class ChatItem(
     val lastMessage: String
 )
 
+data class AppointmentRequest(
+    val doctorId: String,
+    val dateTime: String,
+    val userLogin: String
+)
+
