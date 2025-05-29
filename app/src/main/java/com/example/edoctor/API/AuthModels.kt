@@ -35,6 +35,5 @@ data class AppointmentResponse(
 data class Message(
     val sender: String,
     val receiverDoctorId: String,
-    val content: String,
-    val timestamp: LocalDateTime // или LocalDateTime, если парсишь
+    val content: String
 )

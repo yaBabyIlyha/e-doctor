@@ -66,7 +66,16 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun loadMessages() {
-        // TODO: Загрузка из backend через WebSocket или polling
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val messages = ApiClient.chatApi.getMessages(userLogin, doctorId)
+                withContext(Dispatchers.Main) {
+                    messageAdapter.setMessages(messages)
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 
     private fun sendMessage(content: String) {
@@ -74,7 +83,6 @@ class ChatActivity : AppCompatActivity() {
             sender = userLogin,
             receiverDoctorId = doctorId,
             content = content,
-            timestamp = LocalDateTime.now()
         )
 
         CoroutineScope(Dispatchers.IO).launch {

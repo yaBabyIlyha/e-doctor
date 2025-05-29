@@ -8,13 +8,12 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface ChatApi {
-
-    @GET("/chat/{userLogin}/{doctorId}")
-    suspend fun getMessages(
-        @Path("userLogin") userLogin: String,
-        @Path("doctorId") doctorId: String
-    ): List<Message>
-
     @POST("/chat/send")
     suspend fun sendMessage(@Body message: Message): Response<Unit>
+
+    @GET("/chat/{login}/{doctorId}")
+    suspend fun getMessages(
+        @Path("login") login: String,
+        @Path("doctorId") doctorId: String
+    ): List<Message>
 }
