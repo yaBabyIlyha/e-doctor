@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.edoctor.App
 import com.example.edoctor.R
+import com.example.edoctor.activitys.HistoryActivity
 import com.example.edoctor.activitys.LoginActivity
 import com.google.android.material.switchmaterial.SwitchMaterial
 
@@ -44,6 +46,11 @@ class ProfileFragment : Fragment() {
 
         logOutButton.setOnClickListener {
             val intent = Intent(requireContext(), LoginActivity::class.java)
+            startActivity(intent)
+        }
+
+        view.findViewById<TextView>(R.id.tvHistory).setOnClickListener {
+            val intent = Intent(requireContext(), HistoryActivity::class.java)
             startActivity(intent)
         }
     }

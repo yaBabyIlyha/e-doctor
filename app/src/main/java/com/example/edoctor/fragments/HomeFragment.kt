@@ -42,7 +42,6 @@ class HomeFragment : Fragment() {
         val login = requireContext().getSharedPreferences("auth", Context.MODE_PRIVATE)
             .getString("user_login", null)
 
-        // Если логин есть, просто показываем его, без запроса
         updateUI(login)
     }
 

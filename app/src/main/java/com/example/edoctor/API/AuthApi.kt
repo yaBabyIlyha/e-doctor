@@ -29,4 +29,8 @@ interface AuthApi {
     @GET("appointment/next")
     fun getNextAppointmentByLogin(@Query("login") login: String): Call<AppointmentResponse>
 
+    @GET("appointments")
+    fun getAllAppointmentsByLogin(@Query("login") login: String): Call<List<AppointmentResponse>>
+
+
 }

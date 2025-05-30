@@ -28,9 +28,9 @@ data class AppointmentResponse(
     val appointmentId: Int,
     val doctorId: String,
     val dateTime: String,
-    val doctorFirstName: String,
-    val doctorSecondName: String,
-    val doctorSpecialization: String
+    val doctorFirstName: String?,
+    val doctorSecondName: String?,
+    val doctorSpecialization: String?
 )
 
 data class Message(

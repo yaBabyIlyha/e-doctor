@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -33,6 +33,7 @@
         app:srcCompat="@drawable/ic_close" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDoctorHistory"
         android:layout_width="409dp"
         android:layout_height="687dp"
         android:layout_marginStart="1dp"
