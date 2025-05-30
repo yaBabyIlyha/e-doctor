@@ -1,5 +1,6 @@
 package com.example.edoctor.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +16,7 @@ import com.example.edoctor.R
 import com.example.edoctor.activitys.HistoryActivity
 import com.example.edoctor.activitys.LoginActivity
 import com.google.android.material.switchmaterial.SwitchMaterial
+import org.w3c.dom.Text
 
 class ProfileFragment : Fragment() {
     private lateinit var mySwitch: SwitchMaterial
@@ -29,6 +31,11 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val prefs = requireContext().getSharedPreferences("auth", Context.MODE_PRIVATE)
+        val userLogin = prefs.getString("user_login", null)
+
+        view.findViewById<TextView>(R.id.tvUserName2).text = userLogin
 
         var logOutButton = view.findViewById<ImageView>(R.id.imageViewSettingsIcon)
         mySwitch = view.findViewById(R.id.themeSwitcher)
