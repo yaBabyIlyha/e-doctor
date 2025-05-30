@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.edoctor.API.AppointmentResponse
 import com.example.edoctor.R
 
-class HistoryAdapter(private val appointments: List<AppointmentResponse>) :
-    RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
+class HistoryAdapter(
+    private val appointments: List<AppointmentResponse>,
+    private val onItemClick: (AppointmentResponse) -> Unit
+) : RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
 
     class HistoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val doctorName: TextView = itemView.findViewById(R.id.tvDoctorName)
@@ -33,8 +35,12 @@ class HistoryAdapter(private val appointments: List<AppointmentResponse>) :
         val dateTime = appointment.dateTime.split("T")
         holder.date.text = dateTime.getOrNull(0) ?: ""
         holder.time.text = dateTime.getOrNull(1)?.substring(0, 5) ?: ""
-        // Можно добавить загрузку изображения
+
+        holder.itemView.setOnClickListener {
+            onItemClick(appointment)
+        }
     }
+
 
     override fun getItemCount(): Int = appointments.size
 }

@@ -30,8 +30,20 @@ class HistoryActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_history)
 
-        recyclerView = findViewById(R.id.rvDoctorHistory) // поправь ID если отличается
-        adapter = HistoryAdapter(appointmentList)
+        val login = this.getSharedPreferences("auth", Context.MODE_PRIVATE)
+            .getString("user_login", null) ?: return
+
+        adapter = HistoryAdapter(appointmentList) { appointment ->
+            val intent = Intent(this, ChatActivity::class.java).apply {
+                putExtra("doctorId", appointment.doctorId)
+                putExtra("doctorName", "${appointment.doctorFirstName} ${appointment.doctorSecondName}")
+                putExtra("userLogin", login)
+                putExtra("isDoctor", false)
+            }
+            startActivity(intent)
+        }
+
+        recyclerView = findViewById(R.id.rvDoctorHistory)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -40,11 +52,7 @@ class HistoryActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // Пример: передача логина через Intent
-        val login = this.getSharedPreferences("auth", Context.MODE_PRIVATE)
-            .getString("user_login", null)
-
-        ApiClient.authApi.getAllAppointmentsByLogin(login!!).enqueue(object :
+        ApiClient.authApi.getAllAppointmentsByLogin(login).enqueue(object :
             Callback<List<AppointmentResponse>> {
             override fun onResponse(call: Call<List<AppointmentResponse>>, response: Response<List<AppointmentResponse>>) {
                 if (response.isSuccessful) {
@@ -62,3 +70,4 @@ class HistoryActivity : AppCompatActivity() {
         })
     }
 }
+
